@@ -1,0 +1,23 @@
+{
+  "name": "tetris-devsecops",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "lint": "eslint src --ext .js,.jsx"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^4.4.0",
+    "vitest": "^0.34.0",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.33.0"
+  }
+}

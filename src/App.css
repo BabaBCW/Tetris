@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0a0a0f;
+  --surface:   #12121a;
+  --border:    #1e1e2e;
+  --accent:    #00f0f0;
+  --accent2:   #f000f0;
+  --text:      #c0c0d0;
+  --text-dim:  #505060;
+  --glow:      0 0 10px rgba(0,240,240,0.4);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Share Tech Mono', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(0,240,240,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(240,0,240,0.04) 0%, transparent 60%),
+    var(--bg);
+}
+
+/* CRT scanlines */
+.scanlines {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+  z-index: 100;
+}
+
+.game-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 24px;
+}
+
+/* ─── Side panels ─── */
+.side-panel {
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.logo {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 10px 0;
+}
+.logo-t  { color: #00f0f0; }
+.logo-e  { color: #f0f000; }
+.logo-t2 { color: #a000f0; }
+.logo-r  { color: #00f000; }
+.logo-i  { color: #f00000; }
+.logo-s  { color: #f0a000; }
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+.stat-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+.stat-value {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 13px;
+  color: var(--accent);
+  text-shadow: var(--glow);
+}
+.level-value { color: #f0a000; text-shadow: 0 0 10px rgba(240,160,0,0.5); }
+
+.level-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.level-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.panel-section { display: flex; flex-direction: column; gap: 8px; }
+
+.next-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px;
+  min-height: 80px;
+}
+
+.controls-panel { margin-top: 4px; }
+.controls-list { display: flex; flex-direction: column; gap: 5px; }
+.ctrl-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: var(--text-dim);
+}
+.key {
+  background: var(--border);
+  border: 1px solid #2e2e3e;
+  border-radius: 3px;
+  padding: 2px 5px;
+  font-size: 9px;
+  color: var(--text);
+  min-width: 28px;
+  text-align: center;
+}
+
+.btn-group { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.btn-action {
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  padding: 7px;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.15s;
+}
+.btn-action:hover {
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: var(--glow);
+}
+.btn-danger { border-color: #f04040; color: #f04040; }
+.btn-danger:hover { background: #f04040; color: var(--bg); box-shadow: 0 0 10px rgba(240,64,64,0.4); }
+
+/* ─── Board ─── */
+.board-wrapper {
+  position: relative;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(0,240,240,0.15), inset 0 0 20px rgba(0,0,0,0.5);
+  background: #050508;
+  overflow: hidden;
+}
+
+.game-board { display: block; }
+
+/* ─── Overlays ─── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5,5,8,0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  backdrop-filter: blur(2px);
+}
+
+.overlay-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 18px;
+  color: var(--accent);
+  text-shadow: var(--glow);
+  animation: flicker 3s infinite;
+}
+.overlay-sub {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+}
+.final-score {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  color: #f0a000;
+}
+
+@keyframes flicker {
+  0%,95%,100% { opacity: 1; }
+  96% { opacity: 0.7; }
+  97% { opacity: 1; }
+  98% { opacity: 0.85; }
+}
+
+.btn-start {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.15s;
+  animation: pulse-border 2s infinite;
+}
+.btn-start:hover {
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: var(--glow);
+}
+
+@keyframes pulse-border {
+  0%,100% { box-shadow: 0 0 6px rgba(0,240,240,0.3); }
+  50%      { box-shadow: 0 0 14px rgba(0,240,240,0.6); }
+}
+
+.controls-hint {
+  font-size: 9px;
+  color: var(--text-dim);
+  text-align: center;
+  line-height: 2;
+  letter-spacing: 1px;
+}
+
+/* ─── Mobile controls ─── */
+.mobile-controls {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+.mc-row { display: flex; gap: 6px; }
+.mc-btn {
+  width: 40px; height: 40px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: all 0.1s;
+}
+.mc-btn:active { background: var(--accent); color: var(--bg); }
+.mc-wide { width: 88px; font-size: 11px; }
+
+@media (max-width: 600px) {
+  .game-wrapper { flex-direction: column; align-items: center; padding: 12px; gap: 12px; }
+  .side-panel { width: 100%; flex-direction: row; flex-wrap: wrap; gap: 8px; }
+  .left-panel .logo { display: none; }
+  .stat-card { flex: 1; min-width: 80px; }
+  .right-panel .controls-panel { display: none; }
+  .mobile-controls { display: flex; }
+}
