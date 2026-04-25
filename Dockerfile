@@ -18,6 +18,9 @@ RUN npm run build
 # ─── Stage 2: Serve ───────────────────────────────────────────
 FROM nginx:1.27-alpine AS production
 
+# Upgrade all packages to latest patched versions — fixes Trivy CVEs
+RUN apk update && apk upgrade --no-cache
+
 # Remove default nginx config
 RUN rm /etc/nginx/conf.d/default.conf
 
