@@ -27,7 +27,8 @@ spec:
     spec:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 101
+        runAsUser: 1001           # appuser — confirmed via `id` command
+        runAsGroup: 1001          # appgroup
         seccompProfile:
           type: RuntimeDefault
       containers:
