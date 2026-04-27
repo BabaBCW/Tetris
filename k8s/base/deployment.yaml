@@ -5,9 +5,9 @@ metadata:
   namespace: tetris
   labels:
     app: tetris
-    version: "1.0"
+    version: "1.1"          # bumped version label — visible in ArgoCD diff
 spec:
-  replicas: 2
+  replicas: 3               # changed from 2 → 3
   selector:
     matchLabels:
       app: tetris
@@ -20,15 +20,15 @@ spec:
     metadata:
       labels:
         app: tetris
-        version: "1.0"
+        version: "1.1"      # bumped here too
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "80"
     spec:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1001           # appuser — confirmed via `id` command
-        runAsGroup: 1001          # appgroup
+        runAsUser: 1001
+        runAsGroup: 1001
         seccompProfile:
           type: RuntimeDefault
       containers:
@@ -65,3 +65,4 @@ spec:
             periodSeconds: 10
             failureThreshold: 3
       restartPolicy: Always
+      
