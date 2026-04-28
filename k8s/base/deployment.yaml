@@ -5,9 +5,9 @@ metadata:
   namespace: tetris
   labels:
     app: tetris
-    version: "1.3"          # bumped version label — visible in ArgoCD diff
+    version: "1.2"          # bumped version label — visible in ArgoCD diff
 spec:
-  replicas: 6               # changed from 2 → 3
+  replicas: 5               # changed from 2 → 3
   selector:
     matchLabels:
       app: tetris
